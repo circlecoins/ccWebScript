@@ -18,8 +18,8 @@ def open_instagram_and_click_account(username, password, account_name):
     password_input = driver.find_element(By.NAME, "password")
 
     # Ввести логин и пароль
-    username_input.send_keys({username})
-    password_input.send_keys({password})
+    username_input.send_keys(username)
+    password_input.send_keys(password)
 
     # Нажать кнопку входа
     password_input.send_keys(Keys.ENTER)
