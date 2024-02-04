@@ -5,7 +5,7 @@ import time
 
 def open_instagram_and_click_account(username, password, account_name):
     # Инициализировать драйвер браузера
-    driver = webdriver.Chrome()
+    driver = webdriver.Firefox()
 
     # Открыть страницу Instagram
     driver.get("https://www.instagram.com")
