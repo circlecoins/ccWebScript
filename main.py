@@ -1,11 +1,14 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.firefox.options import Options
 import time
 
+options = Options()
+options.add_argument("--headless")  # Запуск в headless режиме
+driver = webdriver.Firefox(options=options)
+
 def open_instagram_and_click_account(username, password, account_name):
-    # Инициализировать драйвер браузера
-    driver = webdriver.Firefox()
 
     # Открыть страницу Instagram
     driver.get("https://www.instagram.com")
