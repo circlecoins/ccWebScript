@@ -21,8 +21,8 @@ def open_instagram_and_click_account(username, password, account_name):
     password_input = driver.find_element(By.NAME, "password")
 
     # Ввести логин и пароль
-    username_input.send_keys(username)
-    password_input.send_keys(password)
+    username_input.send_keys('leva.dsgn')
+    password_input.send_keys('Realartist99')
 
     # Нажать кнопку входа
     password_input.send_keys(Keys.ENTER)
@@ -37,7 +37,7 @@ def open_instagram_and_click_account(username, password, account_name):
     time.sleep(5)
 
     # Найти и кликнуть по аккаунту с определенным никнеймом
-    account_to_click = driver.find_element(By.XPATH, f"//span[text()='{account_name}']/ancestor::div[@role='button']")
+    account_to_click = driver.find_element(By.XPATH, f"//span[text()='twitchyxpalm']/ancestor::div[@role='button']")
     account_to_click.click()
 
     # Пауза для загрузки профиля
@@ -45,6 +45,3 @@ def open_instagram_and_click_account(username, password, account_name):
 
     # Закрыть браузер после выполнения необходимых действий
     driver.quit()
-
-# Пример вызова функции
-# open_instagram_and_click_account("leva.dsgn", "Realartist99", "twitchyxpalm")
