@@ -8,7 +8,7 @@ options = Options()
 options.add_argument("--headless")  # Запуск в headless режиме
 driver = webdriver.Firefox(options=options)
 
-def open_instagram_and_click_account(username, password, account_name):
+def instAddFunc(username, password, account_name):
 
     # Открыть страницу Instagram
     driver.get("https://www.instagram.com")
