@@ -2,46 +2,30 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
-import time
-
-options = Options()
-options.add_argument("--headless")  # Запуск в headless режиме
-driver = webdriver.Firefox(options=options)
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 def instAddFunc(username, password, account_name):
+    options = Options()
+    options.add_argument("--headless")  # Запуск в headless режиме
+    driver = webdriver.Firefox(options=options)
 
-    # Открыть страницу Instagram
-    driver.get("https://www.instagram.com")
+    try:
+        driver.get("https://www.instagram.com")
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "username")))
 
-    # Пауза для загрузки страницы
-    time.sleep(3)
+        username_input = driver.find_element(By.NAME, "username")
+        password_input = driver.find_element(By.NAME, "password")
+        username_input.send_keys(username)
+        password_input.send_keys(password)
+        password_input.send_keys(Keys.ENTER)
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[text()='Close Friends']")))
+        driver.get("https://www.instagram.com/accounts/close_friends/")
 
-    # Найти поля для ввода логина и пароля
-    username_input = driver.find_element(By.NAME, "username")
-    password_input = driver.find_element(By.NAME, "password")
+        account_to_click = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, f"//span[text()='{account_name}']/ancestor::div[@role='button']"))
+         )
+        account_to_click.click()
 
-    # Ввести логин и пароль
-    username_input.send_keys('leva.dsgn')
-    password_input.send_keys('Realartist99')
-
-    # Нажать кнопку входа
-    password_input.send_keys(Keys.ENTER)
-
-    # Пауза для завершения авторизации
-    time.sleep(5)
-
-    # Переход на страницу близких друзей
-    driver.get("https://www.instagram.com/accounts/close_friends/")
-
-    # Пауза для загрузки страницы
-    time.sleep(5)
-
-    # Найти и кликнуть по аккаунту с определенным никнеймом
-    account_to_click = driver.find_element(By.XPATH, f"//span[text()='twitchyxpalm']/ancestor::div[@role='button']")
-    account_to_click.click()
-
-    # Пауза для загрузки профиля
-    time.sleep(3)
-
-    # Закрыть браузер после выполнения необходимых действий
-    driver.quit()
+    finally:
+        driver.quit()
