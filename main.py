@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
-def instAddFunc(username, password, account_name):
+def instAddFunc(USERNAME, PASSWORD, ACCOUNT_NAME):
     options = Options()
     options.add_argument("--headless")  # Running in headless mode
     driver = webdriver.Firefox(options=options)
@@ -23,17 +23,17 @@ def instAddFunc(username, password, account_name):
         logging.debug("Logging in")
         username_input = driver.find_element(By.NAME, "username")
         password_input = driver.find_element(By.NAME, "password")
-        username_input.send_keys(username)
-        password_input.send_keys(password)
+        username_input.send_keys(USERNAME)
+        password_input.send_keys(PASSWORD)
         password_input.send_keys(Keys.ENTER)
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[text()='Close Friends']")))
         
         logging.debug("Navigating to close friends list")
         driver.get("https://www.instagram.com/accounts/close_friends/")
 
-        logging.debug(f"Adding {account_name} to close friends")
+        logging.debug(f"Adding {ACCOUNT_NAME} to close friends")
         account_to_click = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, f"//span[text()='{account_name}']/ancestor::div[@role='button']"))
+        EC.presence_of_element_located((By.XPATH, f"//span[text()='{ACCOUNT_NAME}']/ancestor::div[@role='button']"))
          )
         account_to_click.click()
 
