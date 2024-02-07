@@ -37,7 +37,7 @@ def instAddFunc(USERNAME, PASSWORD, ACCOUNT_NAME):
 
         logging.debug(f"Adding {ACCOUNT_NAME} to close friends")
         account_to_click = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, f"//div[contains(@class, 'wbloks_1') and @role='button' and .//span[contains(text(), '{ACCOUNT_NAME}')]]"))
+        EC.presence_of_element_located((By.XPATH, f"//*[@class='wbloks_1' and text()='{ACCOUNT_NAME}']"))
          )
         account_to_click.click()
 
