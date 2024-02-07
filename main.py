@@ -18,11 +18,16 @@ def instAddFunc(USERNAME, PASSWORD, ACCOUNT_NAME):
     try:
         logging.debug("Opening Instagram")
         driver.get("https://www.instagram.com")
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "username")))
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.NAME, "username")))
 
         logging.debug("Logging in")
-        username_input = driver.find_element(By.NAME, "username")
-        password_input = driver.find_element(By.NAME, "password")
+        username_input = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.NAME, "username"))
+)
+        password_input = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.NAME, "password"))
+)
+
         username_input.send_keys(USERNAME)
         password_input.send_keys(PASSWORD)
         password_input.send_keys(Keys.ENTER)
@@ -33,7 +38,7 @@ def instAddFunc(USERNAME, PASSWORD, ACCOUNT_NAME):
 
         logging.debug(f"Adding {ACCOUNT_NAME} to close friends")
         account_to_click = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, f"//span[text()='{ACCOUNT_NAME}']/ancestor::div[@role='button']"))
+        EC.presence_of_element_located((By.XPATH, f"///span[contains(text(), '{ACCOUNT_NAME}')]/ancestor::div[@role='button']"))
          )
         account_to_click.click()
 
