@@ -31,7 +31,6 @@ def instAddFunc(USERNAME, PASSWORD, ACCOUNT_NAME):
         username_input.send_keys(USERNAME)
         password_input.send_keys(PASSWORD)
         password_input.send_keys(Keys.ENTER)
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[text()='Close Friends']")))
         
         logging.debug("Navigating to close friends list")
         driver.get("https://www.instagram.com/accounts/close_friends/")
