@@ -19,13 +19,13 @@ def run_script():
             logging.error("Missing required parameters in the request")
             return {"error": "Missing required parameters"}, 400
 
-        username = data['username']
-        password = data['password']
-        account_name = data['account_name']
+        USERNAME = data['username']
+        PASSWORD = data['password']
+        ACCOUNT_NAME = data['account_name']
 
         # Запускаем скрипт Selenium в отдельном потоке
-        logging.debug(f"Starting Selenium script for user {username} to add {account_name}")
-        threading.Thread(target=instAddFunc, args=(username, password, account_name)).start()
+        logging.debug(f"Starting Selenium script for user {USERNAME} to add {ACCOUNT_NAME}")
+        threading.Thread(target=instAddFunc, args=(USERNAME, PASSWORD, ACCOUNT_NAME)).start()
 
         # Отправляем ответ, что скрипт запущен
         logging.debug("Selenium script started successfully")
